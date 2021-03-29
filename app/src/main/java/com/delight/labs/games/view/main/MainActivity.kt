@@ -21,16 +21,4 @@ class MainActivity : BaseActivity<MainActivityBinding>() {
     }
 
     override fun getLayoutId(): Int = R.layout.main_activity
-
-
-    @SingleClick
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.test_tv -> testView()
-        }
-    }
-
-    private fun testView() {
-        mViewModel.testView()
-    }
 }

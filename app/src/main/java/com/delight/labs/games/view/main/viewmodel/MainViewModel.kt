@@ -29,7 +29,4 @@ class MainViewModel constructor():BaseViewModel(){
 
     val loading = MutableLiveData<Boolean>().apply { set(false) }
 
-    fun testView() {
-        text.set("${text.get() ?: ""}111")
-    }
 }
