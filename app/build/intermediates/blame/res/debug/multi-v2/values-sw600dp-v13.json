@@ -4,7 +4,7 @@
             "outputFile": "/Users/mac/Documents/personal/code/Android/PeekabooBalloon/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/mac/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/043c779e2b4d9c498ba3abf7954a945d/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/Users/mac/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.0.aar/6ebab06adc4d5c506ae1715b29b05ae8/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/mac/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/8b1b624ba2affba04a2dba43ca0f97f2/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/Users/mac/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/971cb3ad7802543b4a09609c16f0d1db/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

@@ -1,6 +1,6 @@
 package com.delight.labs.games.helper.extens
 
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import com.uber.autodispose.AutoDispose
 import com.uber.autodispose.SingleSubscribeProxy
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider

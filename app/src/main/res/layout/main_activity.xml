@@ -14,7 +14,7 @@
                 type="com.delight.labs.games.view.base.Presenter"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".view.main.MainActivity">
@@ -50,5 +50,5 @@
                 android:background="@color/colorAccent"
                 tools:text="Hello World!"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

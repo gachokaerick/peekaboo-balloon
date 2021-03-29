@@ -10,7 +10,7 @@ public final class NormalBindKt {
      * *
      * * Created by ditclear on 2017/10/2.
      */
-    @android.databinding.BindingAdapter(value = {"url"})
+    @androidx.databinding.BindingAdapter(value = {"url"})
     public static final void bindUrl(@org.jetbrains.annotations.NotNull()
     android.widget.ImageView imageView, @org.jetbrains.annotations.Nullable()
     java.lang.String url) {

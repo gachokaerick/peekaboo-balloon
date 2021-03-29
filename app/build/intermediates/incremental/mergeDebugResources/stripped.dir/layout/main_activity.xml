@@ -14,7 +14,7 @@
                                                                    
            
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".view.main.MainActivity" android:tag="layout/main_activity_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
@@ -50,5 +50,5 @@
                 android:background="@color/colorAccent"
                 tools:text="Hello World!"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
          

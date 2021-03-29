@@ -1,8 +1,8 @@
 package com.delight.labs.games.helper.adapter.viewpager
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 
 /**
  * 页面描述：fragment PagerAdapter

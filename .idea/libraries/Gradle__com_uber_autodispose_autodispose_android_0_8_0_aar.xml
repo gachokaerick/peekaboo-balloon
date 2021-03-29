@@ -3,8 +3,8 @@
     <CLASSES>
       <root url="file://$USER_HOME$/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/autodispose-android-0.8.0.aar/b5d481b94000cf939ef0d364954b5194/res" />
       <root url="file://$USER_HOME$/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/jetified-autodispose-android-0.8.0.aar/7721798fabd0f79cf846b6bb2064240c/res" />
-      <root url="jar://$USER_HOME$/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/autodispose-android-0.8.0.aar/b5d481b94000cf939ef0d364954b5194/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/autodispose-android-0.8.0.aar/b5d481b94000cf939ef0d364954b5194/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/jetified-autodispose-android-0.8.0.aar/7721798fabd0f79cf846b6bb2064240c/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/jetified-autodispose-android-0.8.0.aar/7721798fabd0f79cf846b6bb2064240c/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/gradle/android-studio/.gradle/caches/modules-2/files-2.1/com.uber.autodispose/autodispose-android/0.8.0/605e383f02ecfa3d89c8adca90e4dee32d7a59c8/autodispose-android-0.8.0-javadoc.jar!/" />

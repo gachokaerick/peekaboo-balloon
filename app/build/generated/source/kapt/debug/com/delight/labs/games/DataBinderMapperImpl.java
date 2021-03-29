@@ -1,11 +1,11 @@
 package com.delight.labs.games;
 
-import android.databinding.DataBinderMapper;
-import android.databinding.DataBindingComponent;
-import android.databinding.ViewDataBinding;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.View;
+import androidx.databinding.DataBinderMapper;
+import androidx.databinding.DataBindingComponent;
+import androidx.databinding.ViewDataBinding;
 import com.delight.labs.games.databinding.CoreLayoutHolderBindingImpl;
 import com.delight.labs.games.databinding.MainActivityBindingImpl;
 import java.lang.IllegalArgumentException;
@@ -91,7 +91,7 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   @Override
   public List<DataBinderMapper> collectDependencies() {
     ArrayList<DataBinderMapper> result = new ArrayList<DataBinderMapper>(1);
-    result.add(new com.android.databinding.library.baseAdapters.DataBinderMapperImpl());
+    result.add(new androidx.databinding.library.baseAdapters.DataBinderMapperImpl());
     return result;
   }
 

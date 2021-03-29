@@ -1,6 +1,6 @@
 package com.delight.labs.games.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 
 /**
  * 页面描述：viewModel 基类

@@ -1,6 +1,6 @@
 package com.delight.labs.games.view.main.viewmodel
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.delight.labs.games.helper.extens.get
 import com.delight.labs.games.helper.extens.init
 import com.delight.labs.games.helper.extens.set

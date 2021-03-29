@@ -11,13 +11,13 @@ public final class ViewExtensKt {
      * * Created by ditclear on 2017/9/29.
      */
     public static final int getCompactColor(@org.jetbrains.annotations.NotNull()
-    android.app.Activity $receiver, @android.support.annotation.ColorRes()
+    android.app.Activity $receiver, @androidx.annotation.ColorRes()
     int colorRes) {
         return 0;
     }
     
     public static final int dpToPx(@org.jetbrains.annotations.NotNull()
-    android.app.Activity $receiver, @android.support.annotation.DimenRes()
+    android.app.Activity $receiver, @androidx.annotation.DimenRes()
     int resID) {
         return 0;
     }

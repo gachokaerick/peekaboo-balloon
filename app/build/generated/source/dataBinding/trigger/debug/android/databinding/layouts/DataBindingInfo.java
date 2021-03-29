@@ -1,6 +1,6 @@
 package android.databinding.layouts;
 
-import android.databinding.BindingBuildInfo;
+import androidx.databinding.BindingBuildInfo;
 
 @BindingBuildInfo
 public class DataBindingInfo {}

@@ -1,14 +1,14 @@
 package com.delight.labs.games.databinding;
 import com.delight.labs.games.R;
 import com.delight.labs.games.BR;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.View;
 @SuppressWarnings("unchecked")
 public class MainActivityBindingImpl extends MainActivityBinding  {
 
     @Nullable
-    private static final android.databinding.ViewDataBinding.IncludedLayouts sIncludes;
+    private static final androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes;
     @Nullable
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
@@ -17,26 +17,26 @@ public class MainActivityBindingImpl extends MainActivityBinding  {
     }
     // views
     @NonNull
-    private final android.support.constraint.ConstraintLayout mboundView0;
+    private final androidx.constraintlayout.widget.ConstraintLayout mboundView0;
     @NonNull
     private final android.widget.TextView mboundView2;
     // variables
     // values
     // listeners
     // Inverse Binding Event Handlers
-    private android.databinding.InverseBindingListener doubleEtandroidTextAttrChanged = new android.databinding.InverseBindingListener() {
+    private androidx.databinding.InverseBindingListener doubleEtandroidTextAttrChanged = new androidx.databinding.InverseBindingListener() {
         @Override
         public void onChange() {
             // Inverse of vm.doubleBindText.getValue()
             //         is vm.doubleBindText.setValue((java.lang.String) callbackArg_0)
-            java.lang.String callbackArg_0 = android.databinding.adapters.TextViewBindingAdapter.getTextString(doubleEt);
+            java.lang.String callbackArg_0 = androidx.databinding.adapters.TextViewBindingAdapter.getTextString(doubleEt);
             // localize variables for thread safety
             // vm != null
             boolean vmJavaLangObjectNull = false;
             // vm
             com.delight.labs.games.view.main.viewmodel.MainViewModel vm = mVm;
             // vm.doubleBindText
-            android.arch.lifecycle.MutableLiveData<java.lang.String> vmDoubleBindText = null;
+            androidx.lifecycle.MutableLiveData<java.lang.String> vmDoubleBindText = null;
             // vm.doubleBindText.getValue()
             java.lang.String vmDoubleBindTextGetValue = null;
             // vm.doubleBindText != null
@@ -62,16 +62,16 @@ public class MainActivityBindingImpl extends MainActivityBinding  {
         }
     };
 
-    public MainActivityBindingImpl(@Nullable android.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
+    public MainActivityBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
         this(bindingComponent, root, mapBindings(bindingComponent, root, 4, sIncludes, sViewsWithIds));
     }
-    private MainActivityBindingImpl(android.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
+    private MainActivityBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 2
             , (android.widget.EditText) bindings[1]
             , (android.widget.TextView) bindings[3]
             );
         this.doubleEt.setTag(null);
-        this.mboundView0 = (android.support.constraint.ConstraintLayout) bindings[0];
+        this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];
         this.mboundView0.setTag(null);
         this.mboundView2 = (android.widget.TextView) bindings[2];
         this.mboundView2.setTag(null);
@@ -130,13 +130,13 @@ public class MainActivityBindingImpl extends MainActivityBinding  {
     protected boolean onFieldChange(int localFieldId, Object object, int fieldId) {
         switch (localFieldId) {
             case 0 :
-                return onChangeVmDoubleBindText((android.arch.lifecycle.MutableLiveData<java.lang.String>) object, fieldId);
+                return onChangeVmDoubleBindText((androidx.lifecycle.MutableLiveData<java.lang.String>) object, fieldId);
             case 1 :
-                return onChangeVmText((android.arch.lifecycle.MediatorLiveData<java.lang.String>) object, fieldId);
+                return onChangeVmText((androidx.lifecycle.MediatorLiveData<java.lang.String>) object, fieldId);
         }
         return false;
     }
-    private boolean onChangeVmDoubleBindText(android.arch.lifecycle.MutableLiveData<java.lang.String> VmDoubleBindText, int fieldId) {
+    private boolean onChangeVmDoubleBindText(androidx.lifecycle.MutableLiveData<java.lang.String> VmDoubleBindText, int fieldId) {
         if (fieldId == BR._all) {
             synchronized(this) {
                     mDirtyFlags |= 0x1L;
@@ -145,7 +145,7 @@ public class MainActivityBindingImpl extends MainActivityBinding  {
         }
         return false;
     }
-    private boolean onChangeVmText(android.arch.lifecycle.MediatorLiveData<java.lang.String> VmText, int fieldId) {
+    private boolean onChangeVmText(androidx.lifecycle.MediatorLiveData<java.lang.String> VmText, int fieldId) {
         if (fieldId == BR._all) {
             synchronized(this) {
                     mDirtyFlags |= 0x2L;
@@ -162,11 +162,11 @@ public class MainActivityBindingImpl extends MainActivityBinding  {
             dirtyFlags = mDirtyFlags;
             mDirtyFlags = 0;
         }
-        android.arch.lifecycle.MutableLiveData<java.lang.String> vmDoubleBindText = null;
+        androidx.lifecycle.MutableLiveData<java.lang.String> vmDoubleBindText = null;
         com.delight.labs.games.view.main.viewmodel.MainViewModel vm = mVm;
         java.lang.String vmDoubleBindTextGetValue = null;
         java.lang.String vmTextGetValue = null;
-        android.arch.lifecycle.MediatorLiveData<java.lang.String> vmText = null;
+        androidx.lifecycle.MediatorLiveData<java.lang.String> vmText = null;
 
         if ((dirtyFlags & 0x17L) != 0) {
 
@@ -204,18 +204,18 @@ public class MainActivityBindingImpl extends MainActivityBinding  {
         if ((dirtyFlags & 0x15L) != 0) {
             // api target 1
 
-            android.databinding.adapters.TextViewBindingAdapter.setText(this.doubleEt, vmDoubleBindTextGetValue);
-            android.databinding.adapters.TextViewBindingAdapter.setText(this.mboundView2, vmDoubleBindTextGetValue);
+            androidx.databinding.adapters.TextViewBindingAdapter.setText(this.doubleEt, vmDoubleBindTextGetValue);
+            androidx.databinding.adapters.TextViewBindingAdapter.setText(this.mboundView2, vmDoubleBindTextGetValue);
         }
         if ((dirtyFlags & 0x10L) != 0) {
             // api target 1
 
-            android.databinding.adapters.TextViewBindingAdapter.setTextWatcher(this.doubleEt, (android.databinding.adapters.TextViewBindingAdapter.BeforeTextChanged)null, (android.databinding.adapters.TextViewBindingAdapter.OnTextChanged)null, (android.databinding.adapters.TextViewBindingAdapter.AfterTextChanged)null, doubleEtandroidTextAttrChanged);
+            androidx.databinding.adapters.TextViewBindingAdapter.setTextWatcher(this.doubleEt, (androidx.databinding.adapters.TextViewBindingAdapter.BeforeTextChanged)null, (androidx.databinding.adapters.TextViewBindingAdapter.OnTextChanged)null, (androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged)null, doubleEtandroidTextAttrChanged);
         }
         if ((dirtyFlags & 0x16L) != 0) {
             // api target 1
 
-            android.databinding.adapters.TextViewBindingAdapter.setText(this.testTv, vmTextGetValue);
+            androidx.databinding.adapters.TextViewBindingAdapter.setText(this.testTv, vmTextGetValue);
         }
     }
     // Listener Stub Implementations

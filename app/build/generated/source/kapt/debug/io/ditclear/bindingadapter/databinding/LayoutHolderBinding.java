@@ -1,14 +1,14 @@
 package io.ditclear.bindingadapter.databinding;
 import io.ditclear.bindingadapter.R;
 import io.ditclear.bindingadapter.BR;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.View;
 @SuppressWarnings("unchecked")
-public class LayoutHolderBinding extends android.databinding.ViewDataBinding  {
+public class LayoutHolderBinding extends androidx.databinding.ViewDataBinding  {
 
     @Nullable
-    private static final android.databinding.ViewDataBinding.IncludedLayouts sIncludes;
+    private static final androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes;
     @Nullable
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
@@ -27,7 +27,7 @@ public class LayoutHolderBinding extends android.databinding.ViewDataBinding  {
     // listeners
     // Inverse Binding Event Handlers
 
-    public LayoutHolderBinding(@NonNull android.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
+    public LayoutHolderBinding(@NonNull androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
         super(bindingComponent, root, 0);
         final Object[] bindings = mapBindings(bindingComponent, root, 1, sIncludes, sViewsWithIds);
         this.mboundView0 = (android.widget.TextView) bindings[0];
@@ -108,26 +108,26 @@ public class LayoutHolderBinding extends android.databinding.ViewDataBinding  {
 
     @NonNull
     public static LayoutHolderBinding inflate(@NonNull android.view.LayoutInflater inflater, @Nullable android.view.ViewGroup root, boolean attachToRoot) {
-        return inflate(inflater, root, attachToRoot, android.databinding.DataBindingUtil.getDefaultComponent());
+        return inflate(inflater, root, attachToRoot, androidx.databinding.DataBindingUtil.getDefaultComponent());
     }
     @NonNull
-    public static LayoutHolderBinding inflate(@NonNull android.view.LayoutInflater inflater, @Nullable android.view.ViewGroup root, boolean attachToRoot, @Nullable android.databinding.DataBindingComponent bindingComponent) {
-        return android.databinding.DataBindingUtil.<LayoutHolderBinding>inflate(inflater, io.ditclear.bindingadapter.R.layout.layout_holder, root, attachToRoot, bindingComponent);
+    public static LayoutHolderBinding inflate(@NonNull android.view.LayoutInflater inflater, @Nullable android.view.ViewGroup root, boolean attachToRoot, @Nullable androidx.databinding.DataBindingComponent bindingComponent) {
+        return androidx.databinding.DataBindingUtil.<LayoutHolderBinding>inflate(inflater, io.ditclear.bindingadapter.R.layout.layout_holder, root, attachToRoot, bindingComponent);
     }
     @NonNull
     public static LayoutHolderBinding inflate(@NonNull android.view.LayoutInflater inflater) {
-        return inflate(inflater, android.databinding.DataBindingUtil.getDefaultComponent());
+        return inflate(inflater, androidx.databinding.DataBindingUtil.getDefaultComponent());
     }
     @NonNull
-    public static LayoutHolderBinding inflate(@NonNull android.view.LayoutInflater inflater, @Nullable android.databinding.DataBindingComponent bindingComponent) {
+    public static LayoutHolderBinding inflate(@NonNull android.view.LayoutInflater inflater, @Nullable androidx.databinding.DataBindingComponent bindingComponent) {
         return bind(inflater.inflate(io.ditclear.bindingadapter.R.layout.layout_holder, null, false), bindingComponent);
     }
     @NonNull
     public static LayoutHolderBinding bind(@NonNull android.view.View view) {
-        return bind(view, android.databinding.DataBindingUtil.getDefaultComponent());
+        return bind(view, androidx.databinding.DataBindingUtil.getDefaultComponent());
     }
     @NonNull
-    public static LayoutHolderBinding bind(@NonNull android.view.View view, @Nullable android.databinding.DataBindingComponent bindingComponent) {
+    public static LayoutHolderBinding bind(@NonNull android.view.View view, @Nullable androidx.databinding.DataBindingComponent bindingComponent) {
         if (!"layout/layout_holder_0".equals(view.getTag())) {
             throw new RuntimeException("view tag isn't correct on view:" + view.getTag());
         }
