@@ -1,0 +1,10 @@
+{
+  "generator-mvvm-kotlin": {
+    "promptValues": {
+      "name": "PeekabooBalloon",
+      "package": "com.delight.labs.games",
+      "targetSdk": "29",
+      "minSdk": "19"
+    }
+  }
+}

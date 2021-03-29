@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.ditclear:bindinglistadapter:1.0.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/bindinglistadapter-1.0.1.aar/a3468ff20b601ac45f708d8ad9d80aa9/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/bindinglistadapter-1.0.1.aar/a3468ff20b601ac45f708d8ad9d80aa9/res" />
+      <root url="jar://$USER_HOME$/gradle/android-studio/.gradle/caches/transforms-1/files-1.1/bindinglistadapter-1.0.1.aar/a3468ff20b601ac45f708d8ad9d80aa9/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/gradle/android-studio/.gradle/caches/modules-2/files-2.1/com.ditclear/bindinglistadapter/1.0.1/ff8032195ef02dba436e49184a37a75386804115/bindinglistadapter-1.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/gradle/android-studio/.gradle/caches/modules-2/files-2.1/com.ditclear/bindinglistadapter/1.0.1/30d38bbeb10b19ad39748667b49773ed9e7c3d6c/bindinglistadapter-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
