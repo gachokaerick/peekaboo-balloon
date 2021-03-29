@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.delight.labs.games.BuildConfig
 import com.delight.labs.games.helper.Constants
-import com.delight.labs.games.helper.uitls.ToastUtil
+import com.delight.labs.games.helper.utils.ToastUtil
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

@@ -12,4 +12,7 @@ object Constants {
     const val ERROR = 2
     const val SUCCESS = 3
 
+    const val PREFS_GLOBAL = "prefs_global"
+    const val PREF_TOP_SCORE = "pref_top_score"
+
 }
