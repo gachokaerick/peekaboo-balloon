@@ -19,7 +19,7 @@ abstract class AbstractPagerAdapter(fm: FragmentManager, var title: Array<String
 
     override fun getCount(): Int = title.size
 
-    abstract override fun getItem(pos: Int): Fragment?
+    abstract override fun getItem(pos: Int): Fragment
 
     override fun getPageTitle(position: Int): CharSequence = title[position]
 

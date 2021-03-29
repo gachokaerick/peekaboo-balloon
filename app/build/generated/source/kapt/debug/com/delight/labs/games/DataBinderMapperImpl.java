@@ -7,6 +7,7 @@ import androidx.databinding.DataBinderMapper;
 import androidx.databinding.DataBindingComponent;
 import androidx.databinding.ViewDataBinding;
 import com.delight.labs.games.databinding.CoreLayoutHolderBindingImpl;
+import com.delight.labs.games.databinding.FragmentWelcomeBindingImpl;
 import com.delight.labs.games.databinding.MainActivityBindingImpl;
 import java.lang.IllegalArgumentException;
 import java.lang.Integer;
@@ -21,12 +22,15 @@ import java.util.List;
 public class DataBinderMapperImpl extends DataBinderMapper {
   private static final int LAYOUT_CORELAYOUTHOLDER = 1;
 
-  private static final int LAYOUT_MAINACTIVITY = 2;
+  private static final int LAYOUT_FRAGMENTWELCOME = 2;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(2);
+  private static final int LAYOUT_MAINACTIVITY = 3;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(3);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.delight.labs.games.R.layout.core_layout_holder, LAYOUT_CORELAYOUTHOLDER);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.delight.labs.games.R.layout.fragment_welcome, LAYOUT_FRAGMENTWELCOME);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.delight.labs.games.R.layout.main_activity, LAYOUT_MAINACTIVITY);
   }
 
@@ -44,6 +48,12 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new CoreLayoutHolderBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for core_layout_holder is invalid. Received: " + tag);
+        }
+        case  LAYOUT_FRAGMENTWELCOME: {
+          if ("layout/fragment_welcome_0".equals(tag)) {
+            return new FragmentWelcomeBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for fragment_welcome is invalid. Received: " + tag);
         }
         case  LAYOUT_MAINACTIVITY: {
           if ("layout/main_activity_0".equals(tag)) {
@@ -107,10 +117,11 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(2);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(3);
 
     static {
       sKeys.put("layout/core_layout_holder_0", com.delight.labs.games.R.layout.core_layout_holder);
+      sKeys.put("layout/fragment_welcome_0", com.delight.labs.games.R.layout.fragment_welcome);
       sKeys.put("layout/main_activity_0", com.delight.labs.games.R.layout.main_activity);
     }
   }

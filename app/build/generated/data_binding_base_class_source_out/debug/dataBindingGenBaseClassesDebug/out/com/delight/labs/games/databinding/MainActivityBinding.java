@@ -3,8 +3,6 @@ package com.delight.labs.games.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.Bindable;
@@ -15,12 +13,6 @@ import com.delight.labs.games.view.base.Presenter;
 import com.delight.labs.games.view.main.viewmodel.MainViewModel;
 
 public abstract class MainActivityBinding extends ViewDataBinding {
-  @NonNull
-  public final EditText doubleEt;
-
-  @NonNull
-  public final TextView testTv;
-
   @Bindable
   protected MainViewModel mVm;
 
@@ -28,10 +20,8 @@ public abstract class MainActivityBinding extends ViewDataBinding {
   protected Presenter mPresenter;
 
   protected MainActivityBinding(DataBindingComponent _bindingComponent, View _root,
-      int _localFieldCount, EditText doubleEt, TextView testTv) {
+      int _localFieldCount) {
     super(_bindingComponent, _root, _localFieldCount);
-    this.doubleEt = doubleEt;
-    this.testTv = testTv;
   }
 
   public abstract void setVm(@Nullable MainViewModel vm);

@@ -1,0 +1,2 @@
+# Referenced at /Users/mac/Documents/personal/code/Android/PeekabooBalloon/app/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11
+-keep class com.delight.labs.games.App { <init>(...); }
