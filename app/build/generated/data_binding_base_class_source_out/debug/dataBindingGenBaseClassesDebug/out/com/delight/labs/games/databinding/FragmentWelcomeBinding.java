@@ -5,9 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingComponent;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import com.delight.labs.games.view.base.Presenter;
 import com.google.android.material.card.MaterialCardView;
 
 public abstract class FragmentWelcomeBinding extends ViewDataBinding {
@@ -17,11 +19,21 @@ public abstract class FragmentWelcomeBinding extends ViewDataBinding {
   @NonNull
   public final MaterialCardView cvPeekaboo;
 
+  @Bindable
+  protected Presenter mPresenter;
+
   protected FragmentWelcomeBinding(DataBindingComponent _bindingComponent, View _root,
       int _localFieldCount, MaterialCardView cvFloating, MaterialCardView cvPeekaboo) {
     super(_bindingComponent, _root, _localFieldCount);
     this.cvFloating = cvFloating;
     this.cvPeekaboo = cvPeekaboo;
+  }
+
+  public abstract void setPresenter(@Nullable Presenter presenter);
+
+  @Nullable
+  public Presenter getPresenter() {
+    return mPresenter;
   }
 
   @NonNull

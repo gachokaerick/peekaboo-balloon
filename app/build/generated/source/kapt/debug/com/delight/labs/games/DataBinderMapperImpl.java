@@ -7,6 +7,7 @@ import androidx.databinding.DataBinderMapper;
 import androidx.databinding.DataBindingComponent;
 import androidx.databinding.ViewDataBinding;
 import com.delight.labs.games.databinding.CoreLayoutHolderBindingImpl;
+import com.delight.labs.games.databinding.FragmentFloatingBindingImpl;
 import com.delight.labs.games.databinding.FragmentWelcomeBindingImpl;
 import com.delight.labs.games.databinding.MainActivityBindingImpl;
 import java.lang.IllegalArgumentException;
@@ -22,14 +23,17 @@ import java.util.List;
 public class DataBinderMapperImpl extends DataBinderMapper {
   private static final int LAYOUT_CORELAYOUTHOLDER = 1;
 
-  private static final int LAYOUT_FRAGMENTWELCOME = 2;
+  private static final int LAYOUT_FRAGMENTFLOATING = 2;
 
-  private static final int LAYOUT_MAINACTIVITY = 3;
+  private static final int LAYOUT_FRAGMENTWELCOME = 3;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(3);
+  private static final int LAYOUT_MAINACTIVITY = 4;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(4);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.delight.labs.games.R.layout.core_layout_holder, LAYOUT_CORELAYOUTHOLDER);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.delight.labs.games.R.layout.fragment_floating, LAYOUT_FRAGMENTFLOATING);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.delight.labs.games.R.layout.fragment_welcome, LAYOUT_FRAGMENTWELCOME);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.delight.labs.games.R.layout.main_activity, LAYOUT_MAINACTIVITY);
   }
@@ -48,6 +52,12 @@ public class DataBinderMapperImpl extends DataBinderMapper {
             return new CoreLayoutHolderBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for core_layout_holder is invalid. Received: " + tag);
+        }
+        case  LAYOUT_FRAGMENTFLOATING: {
+          if ("layout/fragment_floating_0".equals(tag)) {
+            return new FragmentFloatingBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for fragment_floating is invalid. Received: " + tag);
         }
         case  LAYOUT_FRAGMENTWELCOME: {
           if ("layout/fragment_welcome_0".equals(tag)) {
@@ -117,10 +127,11 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(3);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(4);
 
     static {
       sKeys.put("layout/core_layout_holder_0", com.delight.labs.games.R.layout.core_layout_holder);
+      sKeys.put("layout/fragment_floating_0", com.delight.labs.games.R.layout.fragment_floating);
       sKeys.put("layout/fragment_welcome_0", com.delight.labs.games.R.layout.fragment_welcome);
       sKeys.put("layout/main_activity_0", com.delight.labs.games.R.layout.main_activity);
     }

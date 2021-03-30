@@ -10,5 +10,9 @@
     {
         "merged": "/Users/mac/Documents/personal/code/Android/PeekabooBalloon/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/core_layout_holder.xml",
         "source": "/Users/mac/Documents/personal/code/Android/PeekabooBalloon/app/src/main/res/layout/core_layout_holder.xml"
+    },
+    {
+        "merged": "/Users/mac/Documents/personal/code/Android/PeekabooBalloon/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_floating.xml",
+        "source": "/Users/mac/Documents/personal/code/Android/PeekabooBalloon/app/src/main/res/layout/fragment_floating.xml"
     }
 ]
