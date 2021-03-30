@@ -8,7 +8,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import com.delight.labs.games.R
+import com.delight.labs.games.aop.annotation.SingleClick
 import com.delight.labs.games.databinding.FragmentFloatingBinding
 import com.delight.labs.games.helper.utils.SimpleAlertDialog
 import com.delight.labs.games.helper.utils.SoundHelper
@@ -229,5 +231,22 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
         val max = 255
         val range = max - min + 1
         return (Math.random() * range + min).toInt()
+    }
+
+    @SingleClick
+    override fun onClick(v: View?) {
+        super.onClick(v)
+        when (v?.id) {
+            R.id.cvFloating -> {
+                navController.navigate(
+                    R.id.action_fragmentWelcome_to_floatingFragment, null,
+                    NavOptions.Builder()
+                        .build()
+                )
+            }
+            R.id.cvPeekaboo -> {
+
+            }
+        }
     }
 }

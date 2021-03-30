@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.delight.labs.games.view.base.Presenter" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -10,6 +18,7 @@
             android:id="@+id/cvPeekaboo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:onClick="@{(v)->presenter.onClick(v)}"
             app:cardBackgroundColor="@color/colorPrimaryDark"
             app:cardCornerRadius="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,9 +34,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/amarante_regular"
                     android:gravity="center"
                     android:text="Peekaboo"
-                    android:fontFamily="@font/amarante_regular"
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="36sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -41,6 +50,7 @@
             android:id="@+id/cvFloating"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:onClick="@{(v)->presenter.onClick(v)}"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -55,10 +65,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/amarante_regular"
                     android:gravity="center"
                     android:text="Floating"
                     android:textColor="@color/colorPrimaryDark"
-                    android:fontFamily="@font/amarante_regular"
                     android:textSize="36sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

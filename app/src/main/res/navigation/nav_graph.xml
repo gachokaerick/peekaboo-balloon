@@ -10,5 +10,15 @@
         android:name="com.delight.labs.games.view.welcome.WelcomeFragment"
         tools:layout="@layout/fragment_welcome">
 
+        <action
+            android:id="@+id/action_fragmentWelcome_to_floatingFragment"
+            app:destination="@id/floatingFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/floatingFragment"
+        android:name="com.delight.labs.games.view.floating.FloatingFragment"
+        android:label="FloatingFragment"
+        tools:layout="@layout/fragment_floating" />
 </navigation>

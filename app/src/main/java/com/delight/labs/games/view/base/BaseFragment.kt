@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.delight.labs.games.BR
 
 
@@ -27,6 +29,8 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(), Presenter {
 
     protected var visible = false
 
+    protected lateinit var navController: NavController
+
     /**
      * 标志位，标志已经初始化完成
      */
@@ -43,7 +47,9 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(), Presenter {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mContext = checkNotNull(activity)
+        mContext = requireActivity()
+        navController = findNavController()
+
         initView()
         if (lazyLoad) {
             //延迟加载，需重写lazyLoad方法
