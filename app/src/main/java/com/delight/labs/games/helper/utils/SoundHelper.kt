@@ -9,7 +9,7 @@ import android.media.SoundPool
 import android.os.Build
 import com.delight.labs.games.R
 
-class SoundHelper {
+class SoundHelper(activity: Activity) {
     private var mMusicPlayer: MediaPlayer? = null
 
     private var mSoundPool: SoundPool? = null
@@ -17,7 +17,7 @@ class SoundHelper {
     private var mLoaded = false
     private var mVolume = 0f
 
-    fun SoundHelper(activity: Activity) {
+    init {
         val audioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val actVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC).toFloat()
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
