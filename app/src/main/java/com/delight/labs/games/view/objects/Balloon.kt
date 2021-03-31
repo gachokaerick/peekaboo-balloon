@@ -19,8 +19,8 @@ class Balloon : AppCompatImageView, Animator.AnimatorListener,
 
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, color: Int, rawHeight: Int) : super(context) {
-        mListener = context as BalloonListener?
+    constructor(context: Context, balloonListener: BalloonListener, color: Int, rawHeight: Int) : super(context) {
+        mListener = balloonListener
         setImageResource(R.drawable.balloon)
         this.setColorFilter(color)
         val rawWidth = rawHeight / 2

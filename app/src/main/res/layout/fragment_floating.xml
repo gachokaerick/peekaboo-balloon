@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.delight.labs.games.view.base.Presenter" />
+
+    </data>
+
     <RelativeLayout
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
@@ -73,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:onClick="playGame"
+                android:onClick="@{(v)->presenter.onClick(v)}"
                 android:text="@string/play_game" />
 
             <LinearLayout

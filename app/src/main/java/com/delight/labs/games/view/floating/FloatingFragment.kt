@@ -4,11 +4,10 @@ import android.graphics.Color
 import android.os.AsyncTask
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.view.ViewTreeObserver
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.navigation.NavOptions
 import com.delight.labs.games.R
 import com.delight.labs.games.aop.annotation.SingleClick
 import com.delight.labs.games.databinding.FragmentFloatingBinding
@@ -20,7 +19,7 @@ import com.delight.labs.games.view.base.BaseFragment
 import com.delight.labs.games.view.objects.Balloon
 import java.util.*
 
-class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
+class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.BalloonListener {
     private val MIN_ANIMATION_DELAY = 500
     private val MAX_ANIMATION_DELAY = 1500
     private val MIN_ANIMATION_DURATION = 1000
@@ -34,17 +33,40 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
     private var mLevel = 0
     private var mScore: Int = 0
     private var mPinsUsed: Int = 0
-    private val mScoreDisplay: TextView? = null
-    private var mLevelDisplay: TextView? = null
-    private val mPinImages: List<ImageView> = ArrayList()
+    private val mPinImages: MutableList<ImageView> = ArrayList()
     private val mBalloons: MutableList<Balloon> = ArrayList()
-    private val mGoButton: Button? = null
     private var mGameStopped = true
     private var mBalloonsPopped = 0
     private lateinit var mSoundHelper: SoundHelper
 
     override fun initView() {
         activity?.window?.setBackgroundDrawableResource(R.drawable.modern_background)
+
+        setToFullScreen()
+
+        val viewTreeObserver: ViewTreeObserver = mBinding.root.viewTreeObserver
+        if (viewTreeObserver.isAlive) {
+            viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    mScreenWidth = mBinding.root.width
+                    mScreenHeight = mBinding.root.height
+                    mBinding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
+        }
+
+        mBinding.root.setOnClickListener { setToFullScreen() }
+
+        mPinImages.add(mBinding.pushpin1)
+        mPinImages.add(mBinding.pushpin2)
+        mPinImages.add(mBinding.pushpin3)
+        mPinImages.add(mBinding.pushpin4)
+        mPinImages.add(mBinding.pushpin5)
+
+        updateDisplay()
+
+        mSoundHelper = SoundHelper(requireActivity())
+        mSoundHelper.prepareMusicPlayer(mContext)
     }
 
     override fun loadData(isRefresh: Boolean) {
@@ -86,7 +108,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
         balloonLauncher.execute(mLevel)
         mPlaying = true
         mBalloonsPopped = 0
-        mGoButton!!.text = "Stop game"
+        mBinding.goButton.text = "Stop game"
     }
 
     private fun finishLevel() {
@@ -95,10 +117,10 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
             Toast.LENGTH_SHORT
         ).show()
         mPlaying = false
-        mGoButton!!.text = String.format(Locale.ENGLISH, "Start level %d", ++mLevel)
+        mBinding.goButton.text = String.format(Locale.ENGLISH, "Start level %d", ++mLevel)
     }
 
-    fun playGame(view: View?) {
+    fun playGame() {
         if (mPlaying) {
             gameOver(false)
         } else if (mGameStopped) {
@@ -108,7 +130,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
         }
     }
 
-    fun popBalloon(balloon: Balloon?, userTouch: Boolean) {
+    override fun popBalloon(balloon: Balloon?, userTouch: Boolean) {
         mBalloonsPopped++
         mSoundHelper.playSound()
         (mBinding.root as ViewGroup).removeView(balloon)
@@ -143,7 +165,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
         mBalloons.clear()
         mPlaying = false
         mGameStopped = true
-        mGoButton!!.text = "Start Game"
+        mBinding.levelDisplay.text = "Start Game"
         if (allPinsUsed) {
             if (isTopScore(mContext, mScore)) {
                 setTopScore(mContext, mScore)
@@ -158,8 +180,8 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
     }
 
     private fun updateDisplay() {
-        mScoreDisplay!!.text = mScore.toString()
-        mLevelDisplay!!.text = mLevel.toString()
+        mBinding.scoreDisplay.text = mScore.toString()
+        mBinding.levelDisplay.text = mLevel.toString()
     }
 
     private inner class BalloonLauncher : AsyncTask<Int?, Int?, Void?>() {
@@ -206,7 +228,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
     }
 
     fun launchBalloon(x: Int) {
-        val balloon = Balloon(mContext, getRandomColor(), 150)
+        val balloon = Balloon(mContext, this, getRandomColor(), 150)
         mBalloons.add(balloon)
 
 //      Set balloon vertical position and dimensions, add to container
@@ -237,16 +259,10 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>() {
     override fun onClick(v: View?) {
         super.onClick(v)
         when (v?.id) {
-            R.id.cvFloating -> {
-                navController.navigate(
-                    R.id.action_fragmentWelcome_to_floatingFragment, null,
-                    NavOptions.Builder()
-                        .build()
-                )
-            }
-            R.id.cvPeekaboo -> {
-
+            R.id.go_button -> {
+                playGame()
             }
         }
     }
+
 }

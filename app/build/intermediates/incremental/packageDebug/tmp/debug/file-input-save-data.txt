@@ -1,11 +1,7 @@
 #Internal package file, do not edit.
-#Wed Mar 31 01:30:35 EAT 2021
-1.base=/Users/mac/Documents/personal/code/Android/PeekabooBalloon/app/build/intermediates/transforms/dexMerger/debug/0
+#Wed Mar 31 22:24:16 EAT 2021
 0.baseType=DIRECTORY
-1.baseType=DIRECTORY
-count=2
-1.set=DEX
+0.base=/Users/mac/Documents/personal/code/Android/PeekabooBalloon/app/build/intermediates/transforms/dexMerger/debug/0
 0.path=classes.dex
 0.set=DEX
-0.base=/Users/mac/Documents/personal/code/Android/PeekabooBalloon/app/build/intermediates/transforms/dexMerger/debug/0
-1.path=classes2.dex
+count=1
