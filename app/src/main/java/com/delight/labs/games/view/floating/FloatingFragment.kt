@@ -1,6 +1,7 @@
 package com.delight.labs.games.view.floating
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +9,13 @@ import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import com.delight.labs.games.R
 import com.delight.labs.games.aop.annotation.SingleClick
 import com.delight.labs.games.databinding.FragmentFloatingBinding
+import com.delight.labs.games.helper.extens.logD
 import com.delight.labs.games.helper.utils.*
+import com.delight.labs.games.helper.utils.GameHelper.floatingModePaused
 import com.delight.labs.games.view.base.BaseFragment
 import com.delight.labs.games.view.objects.Balloon
 import java.util.*
@@ -24,6 +28,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     private val NUMBER_OF_PINS = 5
     private val BALLOONS_PER_LEVEL = 5
     private var mPlaying = false
+    private var mPaused = false
     private var mScreenWidth = 0
     private var mScreenHeight = 0
 
@@ -35,6 +40,9 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     private var mGameStopped = true
     private var mBalloonsPopped = 0
     private lateinit var mSoundHelper: SoundHelper
+
+    private var playIcon: Drawable? = null
+    private var pauseIcon: Drawable? = null
 
     override fun initView() {
         activity?.window?.setBackgroundDrawableResource(R.drawable.modern_background)
@@ -66,6 +74,10 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mSoundHelper.prepareMusicPlayer(mContext)
 
         mBinding.tvHighScore.text = getTopScore(mContext).toString()
+
+        pauseIcon = ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_pause_24, null)
+        playIcon =
+            ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_play_arrow_24, null)
     }
 
     override fun loadData(isRefresh: Boolean) {
@@ -107,7 +119,10 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         balloonLauncher.execute(mLevel)
         mPlaying = true
         mBalloonsPopped = 0
-        mBinding.goButton.text = "Stop game"
+        mBinding.goButton.text = resources.getString(R.string.pause)
+        pauseIcon?.let {
+            mBinding.goButton.setCompoundDrawablesWithIntrinsicBounds(null, null, it, null)
+        } ?: logD("pause icon is null")
     }
 
     private fun finishLevel() {
@@ -116,12 +131,14 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
             Toast.LENGTH_SHORT
         ).show()
         mPlaying = false
-        mBinding.goButton.text = String.format(Locale.ENGLISH, "Start level %d", mLevel+1)
+        mBinding.goButton.text = String.format(Locale.ENGLISH, "Start level %d", mLevel + 1)
     }
 
-    fun playGame() {
+    private fun playGame() {
         if (mPlaying) {
-            gameOver(false)
+            pauseGame()
+        } else if (mPaused) {
+            continuePlaying()
         } else if (mGameStopped) {
             startGame()
         } else {
@@ -165,8 +182,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mPlaying = false
         mGameStopped = true
 
-        mBinding.levelDisplay.text = mLevel.toString()
-        mBinding.scoreDisplay.text = mScore.toString()
+        updateDisplay()
 
         mBinding.goButton.text = resources.getString(R.string.start_game)
 
@@ -237,12 +253,12 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         val balloon = Balloon(mContext, this, getRandomColor(), 150)
         mBalloons.add(balloon)
 
-//      Set balloon vertical position and dimensions, add to container
+        // Set balloon vertical position and dimensions, add to container
         balloon.x = x.toFloat()
         balloon.y = (mScreenHeight + balloon.height).toFloat()
         (mBinding.root as ViewGroup).addView(balloon)
 
-//      Let 'er fly
+        // Let 'er fly
         val duration: Int = Math.max(
             MIN_ANIMATION_DURATION,
             MAX_ANIMATION_DURATION - mLevel * 500
@@ -268,7 +284,44 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
             R.id.go_button -> {
                 playGame()
             }
+            R.id.btnQuit -> {
+
+            }
         }
+    }
+
+    private fun pauseGame() {
+        mBalloons.forEach {
+            if (!it.mPopped) {
+                it.mAnimator?.pause()
+            }
+        }
+        mSoundHelper.pauseMusic()
+        mBinding.goButton.text = resources.getString(R.string.continue_game)
+
+        playIcon?.let {
+            mBinding.goButton.setCompoundDrawablesWithIntrinsicBounds(null, null, it, null)
+        } ?: logD("play icon null!")
+        mPlaying = false
+        mPaused = true
+        floatingModePaused = true
+    }
+
+    private fun continuePlaying() {
+        mBalloons.forEach {
+            if (!it.mPopped) {
+                it.mAnimator?.resume()
+            }
+        }
+        mSoundHelper.playMusic()
+        mBinding.goButton.text = resources.getString(R.string.pause)
+
+        pauseIcon?.let {
+            mBinding.goButton.setCompoundDrawablesWithIntrinsicBounds(null, null, it, null)
+        } ?: logD("pause icon null!")
+        mPlaying = true
+        mPaused = false
+        floatingModePaused = false
     }
 
 }

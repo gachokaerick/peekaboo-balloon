@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.widget.AppCompatImageView
 import com.delight.labs.games.R
+import com.delight.labs.games.helper.utils.GameHelper.floatingModePaused
 import com.delight.labs.games.helper.utils.pixelsToDp
 
 class Balloon : AppCompatImageView, Animator.AnimatorListener,
     AnimatorUpdateListener {
-    private var mAnimator: ValueAnimator? = null
-    private var mListener: BalloonListener? = null
-    private var mPopped = false
+    var mAnimator: ValueAnimator? = null
+    var mListener: BalloonListener? = null
+    var mPopped = false
 
     constructor(context: Context) : super(context)
 
@@ -55,7 +56,7 @@ class Balloon : AppCompatImageView, Animator.AnimatorListener,
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (!mPopped && event.action == MotionEvent.ACTION_DOWN) {
+        if (!mPopped && event.action == MotionEvent.ACTION_DOWN && !floatingModePaused) {
             mListener!!.popBalloon(this, true)
             mPopped = true
             mAnimator!!.cancel()
