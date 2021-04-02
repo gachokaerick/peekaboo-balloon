@@ -3,19 +3,23 @@ package com.delight.labs.games.view.floating
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ImageView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
+import androidx.navigation.NavOptions
 import com.delight.labs.games.R
 import com.delight.labs.games.aop.annotation.SingleClick
 import com.delight.labs.games.databinding.FragmentFloatingBinding
 import com.delight.labs.games.helper.extens.logD
 import com.delight.labs.games.helper.utils.*
+import com.delight.labs.games.helper.utils.GameHelper.floatingModeGameOver
 import com.delight.labs.games.helper.utils.GameHelper.floatingModePaused
+import com.delight.labs.games.helper.utils.GameHelper.floatingModePlaying
 import com.delight.labs.games.view.base.BaseFragment
 import com.delight.labs.games.view.objects.Balloon
 import java.util.*
@@ -27,8 +31,6 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     private val MAX_ANIMATION_DURATION = 8000
     private val NUMBER_OF_PINS = 5
     private val BALLOONS_PER_LEVEL = 5
-    private var mPlaying = false
-    private var mPaused = false
     private var mScreenWidth = 0
     private var mScreenHeight = 0
 
@@ -37,14 +39,21 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     private var mPinsUsed: Int = 0
     private val mPinImages: MutableList<ImageView> = ArrayList()
     private val mBalloons: MutableList<Balloon> = ArrayList()
-    private var mGameStopped = true
     private var mBalloonsPopped = 0
     private lateinit var mSoundHelper: SoundHelper
 
     private var playIcon: Drawable? = null
     private var pauseIcon: Drawable? = null
 
+    var balloonsLaunchedForCurrentLevel = 0
+
     override fun initView() {
+        balloonsLaunchedForCurrentLevel = 0
+        mLevel = 0
+        mScore = 0
+        mPinsUsed = 0
+        mBalloonsPopped = 0
+
         activity?.window?.setBackgroundDrawableResource(R.drawable.modern_background)
 
         setToFullScreen()
@@ -100,6 +109,8 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     }
 
     private fun startGame() {
+        mBinding.btnQuit.visibility = View.GONE
+
         setToFullScreen()
         mScore = 0
         mLevel = 0
@@ -107,17 +118,20 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         for (pin in mPinImages) {
             pin.setImageResource(R.drawable.pin)
         }
-        mGameStopped = false
+        floatingModeGameOver = false
         startLevel()
         mSoundHelper.playMusic()
     }
 
     private fun startLevel() {
+        mBinding.btnQuit.visibility = View.GONE
+
         mLevel++
+        balloonsLaunchedForCurrentLevel = 0
         updateDisplay()
         val balloonLauncher = BalloonLauncher()
         balloonLauncher.execute(mLevel)
-        mPlaying = true
+        floatingModePlaying = true
         mBalloonsPopped = 0
         mBinding.goButton.text = resources.getString(R.string.pause)
         pauseIcon?.let {
@@ -126,20 +140,18 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     }
 
     private fun finishLevel() {
-        Toast.makeText(
-            mContext, String.format(Locale.ENGLISH, "You finished level %d", mLevel),
-            Toast.LENGTH_SHORT
-        ).show()
-        mPlaying = false
+        floatingModePlaying = false
+        mBinding.goButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
         mBinding.goButton.text = String.format(Locale.ENGLISH, "Start level %d", mLevel + 1)
+        mBinding.btnQuit.visibility = View.VISIBLE
     }
 
     private fun playGame() {
-        if (mPlaying) {
+        if (floatingModePlaying) {
             pauseGame()
-        } else if (mPaused) {
+        } else if (floatingModePaused) {
             continuePlaying()
-        } else if (mGameStopped) {
+        } else if (floatingModeGameOver) {
             startGame()
         } else {
             startLevel()
@@ -161,8 +173,6 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
             if (mPinsUsed == NUMBER_OF_PINS) {
                 gameOver(true)
                 return
-            } else {
-                Toast.makeText(mContext, "Missed that one!", Toast.LENGTH_SHORT).show()
             }
         }
         updateDisplay()
@@ -172,19 +182,22 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     }
 
     private fun gameOver(allPinsUsed: Boolean) {
-        Toast.makeText(mContext, "Game over!", Toast.LENGTH_SHORT).show()
+        mBinding.btnQuit.visibility = View.VISIBLE
+
+        floatingModeGameOver = true
         mSoundHelper.pauseMusic()
         for (balloon in mBalloons) {
             balloon.setPopped(true)
             (mBinding.root as ViewGroup).removeView(balloon)
         }
         mBalloons.clear()
-        mPlaying = false
-        mGameStopped = true
+        floatingModePlaying = false
+        floatingModeGameOver = true
 
         updateDisplay()
 
         mBinding.goButton.text = resources.getString(R.string.start_game)
+        mBinding.goButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
         if (allPinsUsed) {
             if (isTopScore(mContext, mScore)) {
@@ -219,14 +232,13 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
                 MAX_ANIMATION_DELAY - ((level?.minus(1))?.times(500) ?: 0)
             )
             val minDelay = maxDelay / 2
-            var balloonsLaunched = 0
-            while (mPlaying && balloonsLaunched < BALLOONS_PER_LEVEL) {
+            while (floatingModePlaying && balloonsLaunchedForCurrentLevel < BALLOONS_PER_LEVEL && !floatingModePaused) {
 
 //              Get a random horizontal position for the next balloon
                 val random = Random(Date().time)
                 val xPosition = random.nextInt(mScreenWidth - 200)
                 publishProgress(xPosition)
-                balloonsLaunched++
+                balloonsLaunchedForCurrentLevel++
 
 //              Wait a random number of milliseconds before looping
                 val delay = random.nextInt(minDelay) + minDelay
@@ -285,12 +297,41 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
                 playGame()
             }
             R.id.btnQuit -> {
-
+                val builder: AlertDialog.Builder =
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert)
+                    } else {
+                        AlertDialog.Builder(mContext)
+                    }
+                builder.setTitle(mContext.resources?.getString(R.string.stop_game) ?: "Stop Game")
+                    .setMessage(
+                        mContext.resources?.getString(R.string.stop_game_confirmation)
+                            ?: "Stop the game and go back to menu?"
+                    )
+                    .setPositiveButton(android.R.string.yes) { _, _ ->
+                        gameOver(false)
+                        backToMenu()
+                    }
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show()
             }
         }
     }
 
+    private fun backToMenu() {
+        navController.navigate(
+            R.id.action_floatingFragment_to_fragmentWelcome, null,
+            NavOptions.Builder()
+                .setPopUpTo(R.id.nav_graph, true)
+                .setLaunchSingleTop(true)
+                .build()
+        )
+    }
+
     private fun pauseGame() {
+        mBinding.btnQuit.visibility = View.VISIBLE
+
         mBalloons.forEach {
             if (!it.mPopped) {
                 it.mAnimator?.pause()
@@ -302,12 +343,13 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         playIcon?.let {
             mBinding.goButton.setCompoundDrawablesWithIntrinsicBounds(null, null, it, null)
         } ?: logD("play icon null!")
-        mPlaying = false
-        mPaused = true
+        floatingModePlaying = false
         floatingModePaused = true
     }
 
     private fun continuePlaying() {
+        mBinding.btnQuit.visibility = View.GONE
+
         mBalloons.forEach {
             if (!it.mPopped) {
                 it.mAnimator?.resume()
@@ -316,11 +358,13 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mSoundHelper.playMusic()
         mBinding.goButton.text = resources.getString(R.string.pause)
 
+        val balloonLauncher = BalloonLauncher()
+        balloonLauncher.execute(mLevel)
+
         pauseIcon?.let {
             mBinding.goButton.setCompoundDrawablesWithIntrinsicBounds(null, null, it, null)
         } ?: logD("pause icon null!")
-        mPlaying = true
-        mPaused = false
+        floatingModePlaying = true
         floatingModePaused = false
     }
 

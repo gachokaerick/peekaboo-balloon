@@ -10,4 +10,5 @@
     <string name="back_to_menu">Back to Menu</string>
     <string name="pause">Pause</string>
     <string name="continue_game">Continue</string>
+    <string name="stop_game_confirmation">Stop the game and go back to menu?</string>
 </resources>

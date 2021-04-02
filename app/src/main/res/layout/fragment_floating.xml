@@ -8,6 +8,10 @@
             name="presenter"
             type="com.delight.labs.games.view.base.Presenter" />
 
+        <import type="com.delight.labs.games.helper.utils.GameHelper" />
+
+        <import type="android.view.View" />
+
     </data>
 
     <RelativeLayout

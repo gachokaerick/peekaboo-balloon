@@ -20,5 +20,9 @@
         android:id="@+id/floatingFragment"
         android:name="com.delight.labs.games.view.floating.FloatingFragment"
         android:label="FloatingFragment"
-        tools:layout="@layout/fragment_floating" />
+        tools:layout="@layout/fragment_floating" >
+        <action
+            android:id="@+id/action_floatingFragment_to_fragmentWelcome"
+            app:destination="@id/fragmentWelcome" />
+    </fragment>
 </navigation>
