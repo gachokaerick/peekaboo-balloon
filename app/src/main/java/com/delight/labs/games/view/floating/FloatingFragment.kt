@@ -11,10 +11,7 @@ import android.widget.Toast
 import com.delight.labs.games.R
 import com.delight.labs.games.aop.annotation.SingleClick
 import com.delight.labs.games.databinding.FragmentFloatingBinding
-import com.delight.labs.games.helper.utils.SimpleAlertDialog
-import com.delight.labs.games.helper.utils.SoundHelper
-import com.delight.labs.games.helper.utils.isTopScore
-import com.delight.labs.games.helper.utils.setTopScore
+import com.delight.labs.games.helper.utils.*
 import com.delight.labs.games.view.base.BaseFragment
 import com.delight.labs.games.view.objects.Balloon
 import java.util.*
@@ -25,7 +22,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     private val MIN_ANIMATION_DURATION = 1000
     private val MAX_ANIMATION_DURATION = 8000
     private val NUMBER_OF_PINS = 5
-    private val BALLOONS_PER_LEVEL = 3
+    private val BALLOONS_PER_LEVEL = 5
     private var mPlaying = false
     private var mScreenWidth = 0
     private var mScreenHeight = 0
@@ -67,6 +64,8 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
 
         mSoundHelper = SoundHelper(requireActivity())
         mSoundHelper.prepareMusicPlayer(mContext)
+
+        mBinding.tvHighScore.text = getTopScore(mContext).toString()
     }
 
     override fun loadData(isRefresh: Boolean) {
@@ -117,7 +116,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
             Toast.LENGTH_SHORT
         ).show()
         mPlaying = false
-        mBinding.goButton.text = String.format(Locale.ENGLISH, "Start level %d", ++mLevel)
+        mBinding.goButton.text = String.format(Locale.ENGLISH, "Start level %d", mLevel+1)
     }
 
     fun playGame() {
@@ -165,18 +164,25 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mBalloons.clear()
         mPlaying = false
         mGameStopped = true
-        mBinding.levelDisplay.text = "Start Game"
+
+        mBinding.levelDisplay.text = mLevel.toString()
+        mBinding.scoreDisplay.text = mScore.toString()
+
+        mBinding.goButton.text = resources.getString(R.string.start_game)
+
         if (allPinsUsed) {
             if (isTopScore(mContext, mScore)) {
                 setTopScore(mContext, mScore)
                 val dialog: SimpleAlertDialog = SimpleAlertDialog.newInstance(
-                    "Hew High Score", String.format(
+                    "New High Score", String.format(
                         Locale.ENGLISH, "Your new high score is %d", mScore
                     )
                 )
                 activity?.supportFragmentManager?.let { dialog.show(it, null) }
             }
         }
+
+        mBinding.tvHighScore.text = getTopScore(mContext).toString()
     }
 
     private fun updateDisplay() {
@@ -239,7 +245,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
 //      Let 'er fly
         val duration: Int = Math.max(
             MIN_ANIMATION_DURATION,
-            MAX_ANIMATION_DURATION - mLevel * 1000
+            MAX_ANIMATION_DURATION - mLevel * 500
         )
         balloon.releaseBalloon(mScreenHeight, duration)
     }

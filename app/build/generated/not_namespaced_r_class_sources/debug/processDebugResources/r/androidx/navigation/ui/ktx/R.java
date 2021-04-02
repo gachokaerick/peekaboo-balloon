@@ -1226,13 +1226,13 @@ public final class R {
         public static final int transition_position = 0x7f0900fd;
         public static final int transition_scene_layoutid_cache = 0x7f0900fe;
         public static final int transition_transform = 0x7f0900ff;
-        public static final int uniform = 0x7f090101;
-        public static final int unlabeled = 0x7f090102;
-        public static final int up = 0x7f090103;
-        public static final int view_offset_helper = 0x7f090105;
-        public static final int visible = 0x7f090106;
-        public static final int visible_removing_fragment_view_tag = 0x7f090107;
-        public static final int wrap_content = 0x7f09010a;
+        public static final int uniform = 0x7f090103;
+        public static final int unlabeled = 0x7f090104;
+        public static final int up = 0x7f090105;
+        public static final int view_offset_helper = 0x7f090107;
+        public static final int visible = 0x7f090108;
+        public static final int visible_removing_fragment_view_tag = 0x7f090109;
+        public static final int wrap_content = 0x7f09010c;
     }
     public static final class integer {
         private integer() {}
@@ -1370,16 +1370,16 @@ public final class R {
         public static final int fab_transformation_scrim_behavior = 0x7f10002c;
         public static final int fab_transformation_sheet_behavior = 0x7f10002d;
         public static final int hide_bottom_view_on_scroll_behavior = 0x7f10002e;
-        public static final int mtrl_chip_close_icon_content_description = 0x7f100031;
-        public static final int nav_app_bar_navigate_up_description = 0x7f100032;
-        public static final int nav_app_bar_open_drawer_description = 0x7f100033;
-        public static final int password_toggle_content_description = 0x7f100034;
-        public static final int path_password_eye = 0x7f100035;
-        public static final int path_password_eye_mask_strike_through = 0x7f100036;
-        public static final int path_password_eye_mask_visible = 0x7f100037;
-        public static final int path_password_strike_through = 0x7f100038;
-        public static final int search_menu_title = 0x7f10003c;
-        public static final int status_bar_notification_info_overflow = 0x7f10003d;
+        public static final int mtrl_chip_close_icon_content_description = 0x7f100032;
+        public static final int nav_app_bar_navigate_up_description = 0x7f100033;
+        public static final int nav_app_bar_open_drawer_description = 0x7f100034;
+        public static final int password_toggle_content_description = 0x7f100035;
+        public static final int path_password_eye = 0x7f100036;
+        public static final int path_password_eye_mask_strike_through = 0x7f100037;
+        public static final int path_password_eye_mask_visible = 0x7f100038;
+        public static final int path_password_strike_through = 0x7f100039;
+        public static final int search_menu_title = 0x7f10003d;
+        public static final int status_bar_notification_info_overflow = 0x7f10003f;
     }
     public static final class style {
         private style() {}

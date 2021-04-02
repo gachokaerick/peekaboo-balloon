@@ -1347,6 +1347,8 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id translucent_view
+id tvHighScore
+id tvLabelHighScore
 id uniform
 id unlabeled
 id up
@@ -1489,6 +1491,7 @@ string character_counter_pattern
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string hide_bottom_view_on_scroll_behavior
+string high_score
 string level_label
 string max_number
 string mtrl_chip_close_icon_content_description
@@ -1503,7 +1506,9 @@ string play_game
 string popping_pin
 string score_label
 string search_menu_title
+string start_game
 string status_bar_notification_info_overflow
+string stop_game
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

@@ -157,7 +157,7 @@ public final class R {
         public static final int text2 = 0x7f0900eb;
         public static final int time = 0x7f0900f4;
         public static final int title = 0x7f0900f5;
-        public static final int visible_removing_fragment_view_tag = 0x7f090107;
+        public static final int visible_removing_fragment_view_tag = 0x7f090109;
     }
     public static final class integer {
         private integer() {}
@@ -178,7 +178,7 @@ public final class R {
     public static final class string {
         private string() {}
 
-        public static final int status_bar_notification_info_overflow = 0x7f10003d;
+        public static final int status_bar_notification_info_overflow = 0x7f10003f;
     }
     public static final class style {
         private style() {}
