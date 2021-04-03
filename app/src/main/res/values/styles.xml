@@ -22,13 +22,21 @@
 <!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button</item>-->
 <!--    </style>-->
 
-<!--    <style name="blue_grey_button" parent="Widget.MaterialComponents.Button">-->
-<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.BlueGrey.Button</item>-->
-<!--    </style>-->
+    <style name="red_button" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Red.Button</item>
+    </style>
 
-<!--    <style name="ThemeOverlay.BlueGrey.Button" parent="">-->
-<!--        <item name="colorPrimary">@color/primaryColor</item>-->
-<!--    </style>-->
+    <style name="ThemeOverlay.Red.Button" parent="">
+        <item name="colorPrimary">@color/red</item>
+    </style>
+
+    <style name="blue_grey_button" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.BlueGrey.Button</item>
+    </style>
+
+    <style name="ThemeOverlay.BlueGrey.Button" parent="">
+        <item name="colorPrimary">@color/secondaryColor</item>
+    </style>
 
 <!--    <style name="ThemeOverlay.App.Button" parent="">-->
 <!--        <item name="colorPrimary">@color/primaryColor</item>-->

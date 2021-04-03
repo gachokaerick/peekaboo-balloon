@@ -17,15 +17,18 @@
     <RelativeLayout
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/lightGrey">
 
         <LinearLayout
+            android:id="@+id/llHighScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_toStartOf="@id/llPins"
             android:orientation="horizontal">
 
             <TextView
@@ -35,7 +38,7 @@
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/lato_bold"
                 android:text="@string/high_score"
-                android:textColor="@color/pinColor"
+                android:textColor="@color/primaryColor"
                 android:textSize="20sp" />
 
             <TextView
@@ -43,6 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_regular"
+                android:textColor="@color/secondaryColor"
                 android:textSize="20sp"
                 tools:text="99" />
 
@@ -51,6 +55,7 @@
 
         <!-- Container for pin icons, top right -->
         <LinearLayout
+            android:id="@+id/llPins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -64,40 +69,35 @@
                 android:layout_width="@dimen/pin_size"
                 android:layout_height="@dimen/pin_size"
                 android:contentDescription="@string/popping_pin"
-                android:src="@drawable/pin"
-                android:tint="@color/pinColor" />
+                android:src="@drawable/pin" />
 
             <ImageView
                 android:id="@+id/pushpin2"
                 android:layout_width="@dimen/pin_size"
                 android:layout_height="@dimen/pin_size"
                 android:contentDescription="@string/popping_pin"
-                android:src="@drawable/pin"
-                android:tint="@color/pinColor" />
+                android:src="@drawable/pin" />
 
             <ImageView
                 android:id="@+id/pushpin3"
                 android:layout_width="@dimen/pin_size"
                 android:layout_height="@dimen/pin_size"
                 android:contentDescription="@string/popping_pin"
-                android:src="@drawable/pin"
-                android:tint="@color/pinColor" />
+                android:src="@drawable/pin" />
 
             <ImageView
                 android:id="@+id/pushpin4"
                 android:layout_width="@dimen/pin_size"
                 android:layout_height="@dimen/pin_size"
                 android:contentDescription="@string/popping_pin"
-                android:src="@drawable/pin"
-                android:tint="@color/pinColor" />
+                android:src="@drawable/pin" />
 
             <ImageView
                 android:id="@+id/pushpin5"
                 android:layout_width="@dimen/pin_size"
                 android:layout_height="@dimen/pin_size"
                 android:contentDescription="@string/popping_pin"
-                android:src="@drawable/pin"
-                android:tint="@color/pinColor" />
+                android:src="@drawable/pin" />
 
         </LinearLayout>
 
@@ -106,21 +106,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/lightGrey">
+            android:background="@color/primaryColor">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/go_button"
-                style="?android:borderlessButtonStyle"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:onClick="@{(v)->presenter.onClick(v)}"
-                android:text="@string/start_game" />
+                android:text="@string/start_game"
+                android:textColor="@color/primaryTextColor" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnQuit"
-                style="?android:borderlessButtonStyle"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -128,6 +129,7 @@
                 android:layout_toEndOf="@id/go_button"
                 android:onClick="@{(v)->presenter.onClick(v)}"
                 android:text="@string/back_to_menu"
+                android:textColor="@color/primaryTextColor"
                 android:visibility="gone" />
 
             <LinearLayout
@@ -144,6 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/level_label"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/status_text_size"
                     android:textStyle="bold"
                     tools:ignore="RelativeOverlap" />
@@ -155,6 +158,7 @@
                     android:layout_marginEnd="32dp"
                     android:gravity="end"
                     android:text="@string/max_number"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/status_text_size"
                     android:textStyle="bold" />
 
@@ -163,6 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/score_label"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/status_text_size"
                     android:textStyle="bold"
                     tools:ignore="RelativeOverlap" />
@@ -174,6 +179,7 @@
                     android:layout_marginEnd="16dp"
                     android:gravity="end"
                     android:text="@string/max_number"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/status_text_size"
                     android:textStyle="bold" />
             </LinearLayout>
