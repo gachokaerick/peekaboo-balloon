@@ -11,4 +11,7 @@
     <string name="pause">Pause</string>
     <string name="continue_game">Continue</string>
     <string name="stop_game_confirmation">Stop the game and go back to menu?</string>
+    <string name="easy">Easy</string>
+    <string name="normal">Normal</string>
+    <string name="hard">Hard</string>
 </resources>

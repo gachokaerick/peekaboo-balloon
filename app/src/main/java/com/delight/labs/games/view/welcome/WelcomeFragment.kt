@@ -34,16 +34,16 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
     override fun onClick(v: View?) {
         super.onClick(v)
         when (v?.id) {
-            R.id.cvFloating -> {
-                navController.navigate(
-                    R.id.action_fragmentWelcome_to_floatingFragment, null,
-                    NavOptions.Builder()
-                        .build()
-                )
-            }
-            R.id.cvPeekaboo -> {
-
-            }
+//            R.id.cvFloating -> {
+//                navController.navigate(
+//                    R.id.action_fragmentWelcome_to_floatingFragment, null,
+//                    NavOptions.Builder()
+//                        .build()
+//                )
+//            }
+//            R.id.cvPeekaboo -> {
+//
+//            }
         }
     }
 }

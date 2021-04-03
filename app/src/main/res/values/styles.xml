@@ -1,11 +1,44 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorPrimarySurface">@color/primaryLightColor</item>
+        <item name="colorAccent">@color/primaryTextColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+        <item name="android:textColorSecondary">@color/secondaryTextColor</item>
+<!--        <item name="materialButtonStyle">@style/Widget.App.Button</item>-->
+<!--        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>-->
     </style>
+
+<!--    <style name="AppTheme.Widget.TextView" parent="android:Widget.Holo.Light.TextView">-->
+<!--    </style>-->
+
+<!--    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">-->
+<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button</item>-->
+<!--    </style>-->
+
+<!--    <style name="blue_grey_button" parent="Widget.MaterialComponents.Button">-->
+<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.BlueGrey.Button</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeOverlay.BlueGrey.Button" parent="">-->
+<!--        <item name="colorPrimary">@color/primaryColor</item>-->
+<!--    </style>-->
+
+<!--    <style name="ThemeOverlay.App.Button" parent="">-->
+<!--        <item name="colorPrimary">@color/primaryColor</item>-->
+<!--        <item name="colorPrimaryDark">@color/primaryDarkColor</item>-->
+<!--        <item name="colorAccent">@color/primaryTextColor</item>-->
+<!--        <item name="materialButtonStyle">@style/Widget.App.Button</item>-->
+<!--    </style>-->
+
+    <!--    <style name="ThemeOverlay.EarlsGreen.Button" parent="">-->
+    <!--        <item name="colorPrimary">@color/earls_green_2</item>-->
+    <!--    </style>-->
 
 </resources>
