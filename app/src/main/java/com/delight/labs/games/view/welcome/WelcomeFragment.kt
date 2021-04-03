@@ -5,6 +5,9 @@ import androidx.navigation.NavOptions
 import com.delight.labs.games.R
 import com.delight.labs.games.aop.annotation.SingleClick
 import com.delight.labs.games.databinding.FragmentWelcomeBinding
+import com.delight.labs.games.helper.Constants.EASY_DIFFICULTY
+import com.delight.labs.games.helper.Constants.HARD_DIFFICULTY
+import com.delight.labs.games.helper.Constants.NORMAL_DIFFICULTY
 import com.delight.labs.games.view.base.BaseFragment
 
 class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
@@ -34,16 +37,36 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
     override fun onClick(v: View?) {
         super.onClick(v)
         when (v?.id) {
-//            R.id.cvFloating -> {
-//                navController.navigate(
-//                    R.id.action_fragmentWelcome_to_floatingFragment, null,
-//                    NavOptions.Builder()
-//                        .build()
-//                )
-//            }
-//            R.id.cvPeekaboo -> {
-//
-//            }
+            R.id.btnEasy -> {
+                val action = WelcomeFragmentDirections.actionFragmentWelcomeToFloatingFragment(
+                    EASY_DIFFICULTY
+                )
+                navController.navigate(
+                    action,
+                    NavOptions.Builder()
+                        .build()
+                )
+            }
+            R.id.btnNormal -> {
+                val action = WelcomeFragmentDirections.actionFragmentWelcomeToFloatingFragment(
+                    NORMAL_DIFFICULTY
+                )
+                navController.navigate(
+                    action,
+                    NavOptions.Builder()
+                        .build()
+                )
+            }
+            R.id.btnHard -> {
+                val action = WelcomeFragmentDirections.actionFragmentWelcomeToFloatingFragment(
+                    HARD_DIFFICULTY
+                )
+                navController.navigate(
+                    action,
+                    NavOptions.Builder()
+                        .build()
+                )
+            }
         }
     }
 }

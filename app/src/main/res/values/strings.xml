@@ -2,7 +2,7 @@
     <string name="app_name">PeekabooBalloon</string>
     <string name="level_label">Level:</string>
     <string name="score_label">Score:</string>
-    <string name="max_number">99</string>
+    <string name="max_number">0</string>
     <string name="popping_pin">Popping Pin</string>
     <string name="start_game">Start Game</string>
     <string name="stop_game">Stop Game</string>

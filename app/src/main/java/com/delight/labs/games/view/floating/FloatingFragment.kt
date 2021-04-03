@@ -12,6 +12,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavOptions
+import androidx.navigation.fragment.navArgs
 import com.delight.labs.games.R
 import com.delight.labs.games.aop.annotation.SingleClick
 import com.delight.labs.games.databinding.FragmentFloatingBinding
@@ -46,6 +47,8 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     private var pauseIcon: Drawable? = null
 
     var balloonsLaunchedForCurrentLevel = 0
+
+    private val args: FloatingFragmentArgs by navArgs()
 
     override fun initView() {
         balloonsLaunchedForCurrentLevel = 0

@@ -1,10 +1,13 @@
 apply plugin: "com.android.application"
 
 apply plugin: "kotlin-android"
+apply plugin: 'kotlin-android-extensions'
 
 apply plugin: "kotlin-kapt"
 //aspectj
 apply plugin: 'android-aspectjx'
+
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
@@ -62,6 +65,15 @@ android {
     dataBinding {
         enabled = true
         version = '3.3.2'
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
