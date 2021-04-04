@@ -78,7 +78,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mPinsUsed = 0
         mBalloonsPopped = 0
 
-        activity?.window?.setBackgroundDrawableResource(R.drawable.modern_background)
+//        activity?.window?.setBackgroundDrawableResource(R.drawable.modern_background)
 
         setToFullScreen()
 
