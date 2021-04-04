@@ -16,6 +16,15 @@ import androidx.navigation.fragment.navArgs
 import com.delight.labs.games.R
 import com.delight.labs.games.aop.annotation.SingleClick
 import com.delight.labs.games.databinding.FragmentFloatingBinding
+import com.delight.labs.games.helper.Constants.BALLOONS_PER_LEVEL
+import com.delight.labs.games.helper.Constants.EASY_SPEED
+import com.delight.labs.games.helper.Constants.HARD_SPEED
+import com.delight.labs.games.helper.Constants.MAX_ANIMATION_DELAY
+import com.delight.labs.games.helper.Constants.MAX_ANIMATION_DURATION
+import com.delight.labs.games.helper.Constants.MIN_ANIMATION_DELAY
+import com.delight.labs.games.helper.Constants.MIN_ANIMATION_DURATION
+import com.delight.labs.games.helper.Constants.NORMAL_SPEED
+import com.delight.labs.games.helper.Constants.NUMBER_OF_PINS
 import com.delight.labs.games.helper.extens.logD
 import com.delight.labs.games.helper.utils.*
 import com.delight.labs.games.helper.utils.GameHelper.floatingModeGameOver
@@ -26,12 +35,6 @@ import com.delight.labs.games.view.objects.Balloon
 import java.util.*
 
 class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.BalloonListener {
-    private val MIN_ANIMATION_DELAY = 500
-    private val MAX_ANIMATION_DELAY = 1500
-    private val MIN_ANIMATION_DURATION = 1000
-    private val MAX_ANIMATION_DURATION = 8000
-    private val NUMBER_OF_PINS = 5
-    private val BALLOONS_PER_LEVEL = 5
     private var mScreenWidth = 0
     private var mScreenHeight = 0
 
@@ -48,10 +51,28 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
 
     var balloonsLaunchedForCurrentLevel = 0
 
+    private var speed: Int = 500 //default
+
     private val args: FloatingFragmentArgs by navArgs()
 
     override fun initView() {
         balloonsLaunchedForCurrentLevel = 0
+        speed = when (args.difficulty) {
+            1 -> {
+                EASY_SPEED
+            }
+            2 -> {
+                NORMAL_SPEED
+            }
+            3 -> {
+                HARD_SPEED
+            }
+            else -> {
+                EASY_SPEED
+            }
+        }
+
+
         mLevel = 0
         mScore = 0
         mPinsUsed = 0
@@ -230,8 +251,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
                 )
             }
             val level = params[0]
-            val maxDelay: Int = Math.max(
-                MIN_ANIMATION_DELAY,
+            val maxDelay: Int = MIN_ANIMATION_DELAY.coerceAtLeast(
                 MAX_ANIMATION_DELAY - ((level?.minus(1))?.times(500) ?: 0)
             )
             val minDelay = maxDelay / 2
@@ -274,10 +294,8 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         (mBinding.root as ViewGroup).addView(balloon)
 
         // Let 'er fly
-        val duration: Int = Math.max(
-            MIN_ANIMATION_DURATION,
-            MAX_ANIMATION_DURATION - mLevel * 500
-        )
+        val duration: Int =
+            MIN_ANIMATION_DURATION.coerceAtLeast(MAX_ANIMATION_DURATION - mLevel * speed)
         balloon.releaseBalloon(mScreenHeight, duration)
     }
 
