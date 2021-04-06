@@ -55,7 +55,21 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
 
     private val args: FloatingFragmentArgs by navArgs()
 
+    private var isNightTime: Boolean = false
+
     override fun initView() {
+        val cal = Calendar.getInstance(TimeZone.getDefault())
+        val hour = cal[Calendar.HOUR_OF_DAY]
+        isNightTime = hour < 6 || hour > 18
+
+        if (isNightTime) {
+            logD("time is night")
+            mBinding.rlFloating.setBackgroundResource(R.drawable.night_sky)
+        } else {
+            logD("time is day")
+            mBinding.rlFloating.setBackgroundResource(R.drawable.day_sky)
+        }
+
         balloonsLaunchedForCurrentLevel = 0
         speed = when (args.difficulty) {
             1 -> {

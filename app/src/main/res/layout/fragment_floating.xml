@@ -15,10 +15,10 @@
     </data>
 
     <RelativeLayout
-        android:id="@+id/activity_main"
+        android:id="@+id/rlFloating"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/balloons_clouds">
+        android:background="@drawable/day_sky">
 
         <LinearLayout
             android:id="@+id/llHighScore"
@@ -38,7 +38,7 @@
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/lato_bold"
                 android:text="@string/high_score"
-                android:textColor="@color/primaryColor"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp" />
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_regular"
-                android:textColor="@color/secondaryColor"
+                android:textColor="@color/primaryTextColor"
                 android:textSize="20sp"
                 tools:text="99" />
 
