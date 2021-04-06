@@ -43,7 +43,7 @@ class SoundHelper(activity: Activity) {
     }
 
     fun prepareMusicPlayer(context: Context) {
-        mMusicPlayer = MediaPlayer.create(context.applicationContext, R.raw.pleasant_music)
+        mMusicPlayer = MediaPlayer.create(context.applicationContext, R.raw.kazoom)
         mMusicPlayer!!.setVolume(.5f, .5f)
         mMusicPlayer!!.isLooping = true
     }
