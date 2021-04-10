@@ -20,11 +20,9 @@ class Balloon : AppCompatImageView, Animator.AnimatorListener,
 
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, balloonListener: BalloonListener, color: Int, rawHeight: Int) : super(context) {
+    constructor(context: Context, balloonListener: BalloonListener, drawable: Int, rawHeight: Int) : super(context) {
         mListener = balloonListener
-        setImageResource(R.drawable.ic_crazy_face_cyan)
-//        this.setColorFilter(color)
-//        this.setBackgroundColor(context.resources.getColor(android.R.color.transparent))
+        setImageResource(drawable)
         val rawWidth = rawHeight / 2
         val dpHeight: Int = pixelsToDp(rawHeight, context)
         val dpWidth: Int = pixelsToDp(rawWidth, context)

@@ -1,6 +1,5 @@
 package com.delight.labs.games.view.floating
 
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Build
@@ -56,6 +55,9 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     private val args: FloatingFragmentArgs by navArgs()
 
     private var isNightTime: Boolean = false
+
+    private val colors = arrayOf("cyan", "green", "pink", "yellow")
+    private val faces = arrayOf("angry", "crazy", "nervous", "scared", "smiling")
 
     override fun initView() {
         val cal = Calendar.getInstance(TimeZone.getDefault())
@@ -299,7 +301,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     }
 
     fun launchBalloon(x: Int) {
-        val balloon = Balloon(mContext, this, getRandomColor(), 150)
+        val balloon = Balloon(mContext, this, getRandomFace(), 150)
         mBalloons.add(balloon)
 
         // Set balloon vertical position and dimensions, add to container
@@ -311,10 +313,6 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         val duration: Int =
             MIN_ANIMATION_DURATION.coerceAtLeast(MAX_ANIMATION_DURATION - mLevel * speed)
         balloon.releaseBalloon(mScreenHeight, duration)
-    }
-
-    private fun getRandomColor(): Int {
-        return Color.argb(255, randomize(), randomize(), randomize())
     }
 
     private fun randomize(): Int {
@@ -403,4 +401,10 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         floatingModePaused = false
     }
 
+    private fun getRandomFace(): Int {
+        val face = faces.random()
+        val color = colors.random()
+        val fileName: String = "ic_$face" + "_face_$color"
+        return resources.getIdentifier(fileName, "drawable", mContext.packageName)
+    }
 }
