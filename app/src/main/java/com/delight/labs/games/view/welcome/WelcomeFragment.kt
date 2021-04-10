@@ -8,10 +8,15 @@ import com.delight.labs.games.databinding.FragmentWelcomeBinding
 import com.delight.labs.games.helper.Constants.EASY_DIFFICULTY
 import com.delight.labs.games.helper.Constants.HARD_DIFFICULTY
 import com.delight.labs.games.helper.Constants.NORMAL_DIFFICULTY
+import com.delight.labs.games.helper.utils.SoundHelperWelcome
 import com.delight.labs.games.view.base.BaseFragment
 
 class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
+    private lateinit var mSoundHelper: SoundHelperWelcome
     override fun initView() {
+        mSoundHelper = SoundHelperWelcome(requireActivity())
+        mSoundHelper.prepareMusicPlayer(mContext)
+        mSoundHelper.playMusic()
     }
 
     override fun loadData(isRefresh: Boolean) {
@@ -38,6 +43,7 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
         super.onClick(v)
         when (v?.id) {
             R.id.btnEasy -> {
+                mSoundHelper.pauseMusic()
                 val action = WelcomeFragmentDirections.actionFragmentWelcomeToFloatingFragment(
                     EASY_DIFFICULTY
                 )
@@ -48,6 +54,7 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
                 )
             }
             R.id.btnNormal -> {
+                mSoundHelper.pauseMusic()
                 val action = WelcomeFragmentDirections.actionFragmentWelcomeToFloatingFragment(
                     NORMAL_DIFFICULTY
                 )
@@ -58,6 +65,7 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
                 )
             }
             R.id.btnHard -> {
+                mSoundHelper.pauseMusic()
                 val action = WelcomeFragmentDirections.actionFragmentWelcomeToFloatingFragment(
                     HARD_DIFFICULTY
                 )
