@@ -16,7 +16,6 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
     override fun initView() {
         mSoundHelper = SoundHelperWelcome(requireActivity())
         mSoundHelper.prepareMusicPlayer(mContext)
-        mSoundHelper.playMusic()
     }
 
     override fun loadData(isRefresh: Boolean) {
@@ -36,6 +35,12 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding>() {
     override fun onResume() {
         super.onResume()
         setToFullScreen()
+        mSoundHelper.playMusic()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mSoundHelper.pauseMusic()
     }
 
     @SingleClick

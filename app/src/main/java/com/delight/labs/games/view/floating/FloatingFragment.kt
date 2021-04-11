@@ -127,8 +127,6 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         pauseIcon = ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_pause_24, null)
         playIcon =
             ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_play_arrow_24, null)
-
-        mSoundHelper.playMusic()
     }
 
     override fun loadData(isRefresh: Boolean) {
@@ -148,6 +146,12 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     override fun onResume() {
         super.onResume()
         setToFullScreen()
+        mSoundHelper.playMusic()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mSoundHelper.pauseMusic()
     }
 
     private fun startGame() {
