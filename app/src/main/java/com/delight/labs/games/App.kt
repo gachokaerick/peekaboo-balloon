@@ -1,6 +1,6 @@
 package com.delight.labs.games
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.delight.labs.games.di.appModule
 import org.koin.android.ext.android.startKoin
 import org.koin.android.logger.AndroidLogger
@@ -10,7 +10,7 @@ import org.koin.android.logger.AndroidLogger
  *
  * Created by ditclear on 2018/12/11.
  */
-class App : Application() {
+class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
