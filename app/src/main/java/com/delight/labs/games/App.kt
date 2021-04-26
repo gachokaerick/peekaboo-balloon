@@ -1,5 +1,6 @@
 package com.delight.labs.games
 
+import androidx.multidex.BuildConfig
 import androidx.multidex.MultiDexApplication
 import com.delight.labs.games.di.appModule
 import org.koin.android.ext.android.startKoin
