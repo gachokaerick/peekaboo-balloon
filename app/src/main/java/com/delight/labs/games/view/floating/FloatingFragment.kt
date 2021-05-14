@@ -43,6 +43,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     private var balloonsLaunchedForCurrentLevel = 0
     private var speed: Int = 500
     private var isNightTime: Boolean = false
+    private var difficulty: Int = 0
 
     private var playIcon: Drawable? = null
     private var pauseIcon: Drawable? = null
@@ -71,6 +72,8 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         }
 
         balloonsLaunchedForCurrentLevel = 0
+        difficulty = args.difficulty
+
         speed = when (args.difficulty) {
             1 -> {
                 logD("easy speed")
@@ -122,7 +125,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mSoundHelper = SoundHelper(requireActivity())
         mSoundHelper.prepareMusicPlayer(mContext)
 
-        mBinding.tvHighScore.text = getTopScore(mContext).toString()
+        mBinding.tvHighScore.text = getTopScore(mContext, difficulty).toString()
 
         pauseIcon = ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_pause_24, null)
         playIcon =
@@ -250,8 +253,8 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mBinding.goButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
         if (allPinsUsed) {
-            if (isTopScore(mContext, mScore)) {
-                setTopScore(mContext, mScore)
+            if (isTopScore(mContext, mScore, difficulty)) {
+                setTopScore(mContext, mScore, difficulty)
                 val dialog: SimpleAlertDialog = SimpleAlertDialog.newInstance(
                         "New High Score", String.format(
                         Locale.ENGLISH, "Your new high score is %d", mScore
@@ -261,7 +264,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
             }
         }
 
-        mBinding.tvHighScore.text = getTopScore(mContext).toString()
+        mBinding.tvHighScore.text = getTopScore(mContext, difficulty).toString()
     }
 
     private fun updateDisplay() {

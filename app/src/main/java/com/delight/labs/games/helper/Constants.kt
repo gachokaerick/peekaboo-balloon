@@ -15,6 +15,10 @@ object Constants {
     const val PREFS_GLOBAL = "prefs_global"
     const val PREF_TOP_SCORE = "pref_top_score"
 
+    const val EASY_TOP_SCORE = "easy_top_score"
+    const val NORMAL_TOP_SCORE = "normal_top_score"
+    const val HARD_TOP_SCORE = "hard_top_score"
+
     const val EASY_DIFFICULTY = 1
     const val NORMAL_DIFFICULTY = 2
     const val HARD_DIFFICULTY = 3
