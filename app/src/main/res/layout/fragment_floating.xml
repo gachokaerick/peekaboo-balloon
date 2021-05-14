@@ -129,8 +129,7 @@
                 android:layout_toEndOf="@id/go_button"
                 android:onClick="@{(v)->presenter.onClick(v)}"
                 android:text="@string/back_to_menu"
-                android:textColor="@color/white"
-                android:visibility="gone" />
+                android:textColor="@color/white" />
 
             <LinearLayout
                 android:id="@+id/status_display"
