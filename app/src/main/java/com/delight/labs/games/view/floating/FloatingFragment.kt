@@ -36,30 +36,29 @@ import java.util.*
 class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.BalloonListener {
     private var mScreenWidth = 0
     private var mScreenHeight = 0
-
     private var mLevel = 0
     private var mScore: Int = 0
     private var mPinsUsed: Int = 0
-    private val mPinImages: MutableList<ImageView> = ArrayList()
-    private val mBalloons: MutableList<Balloon> = ArrayList()
     private var mBalloonsPopped = 0
-    private lateinit var mSoundHelper: SoundHelper
+    private var balloonsLaunchedForCurrentLevel = 0
+    private var speed: Int = 500
+    private var isNightTime: Boolean = false
+    private var difficulty: Int = 0
 
     private var playIcon: Drawable? = null
     private var pauseIcon: Drawable? = null
 
-    var balloonsLaunchedForCurrentLevel = 0
-
-    private var speed: Int = 500 //default
-
-    private val args: FloatingFragmentArgs by navArgs()
-
-    private var isNightTime: Boolean = false
-
+    private val mPinImages: MutableList<ImageView> = ArrayList()
+    private val mBalloons: MutableList<Balloon> = ArrayList()
     private val colors = arrayOf("cyan", "green", "pink", "yellow")
     private val faces = arrayOf("angry", "crazy", "nervous", "scared", "smiling")
 
+    private lateinit var mSoundHelper: SoundHelper
+
+    private val args: FloatingFragmentArgs by navArgs()
+
     override fun initView() {
+        logD("init floating fragment")
         val cal = Calendar.getInstance(TimeZone.getDefault())
         val hour = cal[Calendar.HOUR_OF_DAY]
         isNightTime = hour < 6 || hour > 18
@@ -73,28 +72,32 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         }
 
         balloonsLaunchedForCurrentLevel = 0
+        difficulty = args.difficulty
+
         speed = when (args.difficulty) {
             1 -> {
+                logD("easy speed")
                 EASY_SPEED
             }
             2 -> {
+                logD("normal speed")
                 NORMAL_SPEED
             }
             3 -> {
+                logD("hard speed")
                 HARD_SPEED
             }
             else -> {
+                logD("SPEED ERROR!")
                 EASY_SPEED
             }
         }
-
 
         mLevel = 0
         mScore = 0
         mPinsUsed = 0
         mBalloonsPopped = 0
-
-//        activity?.window?.setBackgroundDrawableResource(R.drawable.modern_background)
+        balloonsLaunchedForCurrentLevel = 0
 
         setToFullScreen()
 
@@ -122,11 +125,11 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mSoundHelper = SoundHelper(requireActivity())
         mSoundHelper.prepareMusicPlayer(mContext)
 
-        mBinding.tvHighScore.text = getTopScore(mContext).toString()
+        mBinding.tvHighScore.text = getTopScore(mContext, difficulty).toString()
 
         pauseIcon = ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_pause_24, null)
         playIcon =
-            ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_play_arrow_24, null)
+                ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_play_arrow_24, null)
     }
 
     override fun loadData(isRefresh: Boolean) {
@@ -169,6 +172,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     }
 
     private fun startLevel() {
+        logD("start level")
         mBinding.btnQuit.visibility = View.GONE
 
         mLevel++
@@ -193,12 +197,16 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
 
     private fun playGame() {
         if (floatingModePlaying) {
+            logD("pausing game")
             pauseGame()
         } else if (floatingModePaused) {
+            logD("continue playing")
             continuePlaying()
         } else if (floatingModeGameOver) {
+            logD("start game")
             startGame()
         } else {
+            logD("start level")
             startLevel()
         }
     }
@@ -229,7 +237,6 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     private fun gameOver(allPinsUsed: Boolean) {
         mBinding.btnQuit.visibility = View.VISIBLE
 
-        floatingModeGameOver = true
         mSoundHelper.pauseMusic()
         for (balloon in mBalloons) {
             balloon.setPopped(true)
@@ -238,6 +245,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mBalloons.clear()
         floatingModePlaying = false
         floatingModeGameOver = true
+        floatingModePaused = false
 
         updateDisplay()
 
@@ -245,18 +253,18 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         mBinding.goButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
 
         if (allPinsUsed) {
-            if (isTopScore(mContext, mScore)) {
-                setTopScore(mContext, mScore)
+            if (isTopScore(mContext, mScore, difficulty)) {
+                setTopScore(mContext, mScore, difficulty)
                 val dialog: SimpleAlertDialog = SimpleAlertDialog.newInstance(
-                    "New High Score", String.format(
+                        "New High Score", String.format(
                         Locale.ENGLISH, "Your new high score is %d", mScore
-                    )
+                )
                 )
                 activity?.supportFragmentManager?.let { dialog.show(it, null) }
             }
         }
 
-        mBinding.tvHighScore.text = getTopScore(mContext).toString()
+        mBinding.tvHighScore.text = getTopScore(mContext, difficulty).toString()
     }
 
     private fun updateDisplay() {
@@ -268,12 +276,13 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         override fun doInBackground(vararg params: Int?): Void? {
             if (params.size != 1) {
                 throw AssertionError(
-                    "Expected 1 param for current level"
+                        "Expected 1 param for current level"
                 )
             }
             val level = params[0]
+            logD("execute level: $level")
             val maxDelay: Int = MIN_ANIMATION_DELAY.coerceAtLeast(
-                MAX_ANIMATION_DELAY - ((level?.minus(1))?.times(500) ?: 0)
+                    MAX_ANIMATION_DELAY - ((level?.minus(1))?.times(500) ?: 0)
             )
             val minDelay = maxDelay / 2
             while (floatingModePlaying && balloonsLaunchedForCurrentLevel < BALLOONS_PER_LEVEL && !floatingModePaused) {
@@ -306,6 +315,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
     }
 
     fun launchBalloon(x: Int) {
+        logD("launching balloon")
         val balloon = Balloon(mContext, this, getRandomFace(), 150)
         mBalloons.add(balloon)
 
@@ -316,7 +326,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
 
         // Let 'er fly
         val duration: Int =
-            MIN_ANIMATION_DURATION.coerceAtLeast(MAX_ANIMATION_DURATION - mLevel * speed)
+                MIN_ANIMATION_DURATION.coerceAtLeast(MAX_ANIMATION_DURATION - mLevel * speed)
         balloon.releaseBalloon(mScreenHeight, duration)
     }
 
@@ -336,34 +346,34 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
             }
             R.id.btnQuit -> {
                 val builder: AlertDialog.Builder =
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert)
-                    } else {
-                        AlertDialog.Builder(mContext)
-                    }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            AlertDialog.Builder(mContext, android.R.style.Theme_Material_Dialog_Alert)
+                        } else {
+                            AlertDialog.Builder(mContext)
+                        }
                 builder.setTitle(mContext.resources?.getString(R.string.stop_game) ?: "Stop Game")
-                    .setMessage(
-                        mContext.resources?.getString(R.string.stop_game_confirmation)
-                            ?: "Stop the game and go back to menu?"
-                    )
-                    .setPositiveButton(android.R.string.yes) { _, _ ->
-                        gameOver(false)
-                        backToMenu()
-                    }
-                    .setNegativeButton(android.R.string.no, null)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show()
+                        .setMessage(
+                                mContext.resources?.getString(R.string.stop_game_confirmation)
+                                        ?: "Stop the game and go back to menu?"
+                        )
+                        .setPositiveButton(android.R.string.yes) { _, _ ->
+                            gameOver(false)
+                            backToMenu()
+                        }
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show()
             }
         }
     }
 
     private fun backToMenu() {
         navController.navigate(
-            R.id.action_floatingFragment_to_fragmentWelcome, null,
-            NavOptions.Builder()
-                .setPopUpTo(R.id.nav_graph, true)
-                .setLaunchSingleTop(true)
-                .build()
+                R.id.action_floatingFragment_to_fragmentWelcome, null,
+                NavOptions.Builder()
+                        .setPopUpTo(R.id.nav_graph, true)
+                        .setLaunchSingleTop(true)
+                        .build()
         )
     }
 
@@ -383,6 +393,7 @@ class FloatingFragment : BaseFragment<FragmentFloatingBinding>(), Balloon.Balloo
         } ?: logD("play icon null!")
         floatingModePlaying = false
         floatingModePaused = true
+        floatingModeGameOver = false
     }
 
     private fun continuePlaying() {
